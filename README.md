@@ -7,7 +7,7 @@ This project focuses on clean UI, smooth animations, and an intuitive user exper
 
 ## 🌐 Live Demo
 
-🔗 https://your-portfolio-url.vercel.app
+🔗 https://web-portfolio-grittametwilai.vercel.app/
 
 📄 Resume Download available on the website
 
