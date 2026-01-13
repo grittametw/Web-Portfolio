@@ -41,7 +41,7 @@ export default function Home() {
       description: 'An e-commerce platform with shopping cart, payment system, favorites list, and admin dashboard features.',
       image: 'e-commerce.webp',
       skills: ['Next.js', 'Bootstrap', 'MUI', 'Node.js', 'PostgreSQL'],
-      linkDemo: 'https://web-library-rho.vercel.app/',
+      linkDemo: 'https://web-library-grittametwilai.vercel.app/',
       linkGithub: 'https://github.com/grittametw/Web-Library',
     },
     {
