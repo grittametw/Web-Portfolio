@@ -132,3 +132,16 @@ cd Web-Portfolio
 npm install
 npm run dev
 ```
+
+---
+
+## 👤 Author
+
+Grittamet Wilai
+📧 w.grittamet@gmail.com
+
+💻 https://github.com/grittametw
+
+---
+
+© 2026 Grittamet Wilai. All rights reserved.

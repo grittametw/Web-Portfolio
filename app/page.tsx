@@ -344,7 +344,7 @@ export default function Home() {
 
         <footer className="footer">
           <div className="container">
-            <p className="m-4 text-center text-gray-300"><CopyrightOutlined /> 2026 copyright all right reserved</p>
+            <p className="m-4 text-center text-gray-300"><CopyrightOutlined /> 2026 Grittamet Wilai. All rights reserved.</p>
           </div>
         </footer>
       </div>
