@@ -1,6 +1,6 @@
 # Web-Portfolio
 
-A modern and responsive personal web portfolio built with **Next.js** along with Tailwind CSS and icons from Ant Design to showcase my skills, projects, and work experience.
+A modern and responsive personal web portfolio built with **Next.js** along with **Tailwind CSS** and icons from Ant Design to showcase my skills, projects, and work experience.
 This project focuses on clean UI, smooth animations, and an intuitive user experience.
 
 ---
