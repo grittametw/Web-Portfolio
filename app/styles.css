@@ -96,3 +96,77 @@
 .animate-marquee {
     animation: marquee 20s linear infinite;
 }
+
+/* Responsive Mobile */
+@media (max-width: 768px) {
+    .menu,
+    .about-section,
+    .skills-content,
+    .projects-section,
+    .experiences-section,
+    .contact-section {
+        padding-inline: 40px;
+    }
+
+    .about-section {
+
+        div {
+            font-size: 3rem;
+        }
+
+        p {
+            width: 100%;
+            font-size: 1rem;
+        }
+
+        .hero-image {
+            --size: 250px;
+            margin-top: 40px;
+        }
+    }
+    
+    .skills-content {
+        li {
+            width: 120px;
+            font-size: 0.9rem;
+        }
+
+        img {
+            width: 14px;
+            height: 14px;
+        }
+    }
+
+    .experiences-section {
+        font-size: 0.9rem;
+    }
+}
+
+/* Responsive Tablet */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .menu,
+    .about-section,
+    .skills-content,
+    .projects-section,
+    .experiences-section,
+    .contact-section {
+        padding-inline: 40px;
+    }
+    
+    .about-section {
+
+        div {
+            font-size: 4rem;
+        }
+
+        p {
+            width: 100%;
+            font-size: 1.2rem;
+        }
+
+        .hero-image {
+            --size: 300px;
+            margin-top: 40px;
+        }
+    }
+}

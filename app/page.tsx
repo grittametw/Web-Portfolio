@@ -6,7 +6,7 @@ import {
   EnvironmentOutlined, MailOutlined, PhoneOutlined,
   GithubOutlined, CopyrightOutlined, RightOutlined
 } from '@ant-design/icons';
-import './style.css'
+import './styles.css'
 
 const oswald = Oswald({
   subsets: ['latin'],
@@ -16,6 +16,7 @@ export default function Home() {
   const [isTop, setIsTop] = useState(true)
   const [activeFilter, setActiveFilter] = useState('All')
   const [animationKey, setAnimationKey] = useState(0)
+  const [menuOpen, setMenuOpen] = useState(false)
 
   const skillsData = [
     { name: 'HTML5', category: 'Frontend', color: '#e34f26', icon: 'HTML5.svg' },
@@ -94,28 +95,96 @@ export default function Home() {
     : skillsData.filter(skill => skill.category === activeFilter)
 
   return (
-    <main lang="en" className={oswald.className}>
-      <div className="flex flex-col items-center min-h-screen bg-[#191922] text-white">
-        <nav className={`menu fixed top-0 z-50 w-full flex justify-center shadow-md p-8 md:px-48 transition-all duration-300 
+    <main lang="en" className={`${oswald.className} min-h-screen w-full bg-[#191922] text-white overflow-x-hidden`}>
+      <div className="flex flex-col items-center">
+        <nav className={`menu fixed top-0 z-50 w-full flex justify-center shadow-md py-8 md:px-8 transition-all duration-300 
           ${isTop
             ? 'bg-[#191922] bg-opacity-100'
             : 'bg-opacity-70 backdrop-blur-md'
           }`
         }>
-          <div className="w-300 flex justify-between items-center">
+          <div className="w-full max-w-[1200px] flex justify-between items-center">
             <div className="text-2xl font-bold">Grittamet Wilai</div>
-            <ul className="flex gap-8">
-              <li><a href="#" className="transition hover:text-purple-400 hover:border-b border-purple-400">About Me</a></li>
+
+            <ul className="menu-section hidden md:flex gap-8">
+              <li><a href="#about-section" className="transition hover:text-purple-400 hover:border-b border-purple-400">About Me</a></li>
               <li><a href="#skills-section" className="transition hover:text-fuchsia-500 hover:border-b border-fuchsia-500">Skills</a></li>
               <li><a href="#projects-section" className="transition hover:text-pink-500 hover:border-b border-pink-500">Projects</a></li>
               <li><a href="#experiences-section" className="transition hover:text-rose-400 hover:border-b border-rose-400">Experiences</a></li>
               <li><a href="#contact-section" className="transition hover:text-red-500 hover:border-b border-red-500">Contact</a></li>
             </ul>
+
+            {/* Hamburger Button (Mobile) */}
+            <button
+              className="md:hidden flex flex-col gap-1 cursor-pointer"
+              onClick={() => setMenuOpen(prev => !prev)}
+            >
+              <span className="w-6 h-0.5 bg-white"></span>
+              <span className="w-6 h-0.5 bg-white"></span>
+              <span className="w-6 h-0.5 bg-white"></span>
+            </button>
           </div>
         </nav>
 
-        <div className="w-300 flex flex-col md:flex-row justify-between items-center py-48">
-          <section className="hero space-y-8 max-w-2xl">
+        {/* Mobile Menu */}
+        {menuOpen && (
+          <div className={`fixed top-[96px] z-40 w-full md:hidden border-t border-gray-700
+          ${isTop
+              ? 'bg-[#191922] bg-opacity-100'
+              : 'bg-opacity-70 backdrop-blur-md'
+            }`}>
+            <ul className="flex flex-col items-center gap-4 py-4">
+              <li>
+                <a
+                  onClick={() => setMenuOpen(false)}
+                  href="#about-section"
+                  className="transition hover:text-purple-400 hover:border-b border-purple-400"
+                >
+                  About Me
+                </a>
+              </li>
+              <li>
+                <a
+                  onClick={() => setMenuOpen(false)}
+                  href="#skills-section"
+                  className="transition hover:text-fuchsia-500 hover:border-b border-fuchsia-500"
+                >
+                  Skills
+                </a>
+              </li>
+              <li>
+                <a
+                  onClick={() => setMenuOpen(false)}
+                  href="#projects-section"
+                  className="transition hover:text-pink-500 hover:border-b border-pink-500"
+                >
+                  Projects
+                </a>
+              </li>
+              <li>
+                <a
+                  onClick={() => setMenuOpen(false)}
+                  href="#experiences-section"
+                  className="transition hover:text-rose-400 hover:border-b border-rose-400"
+                >
+                  Experiences
+                </a>
+              </li>
+              <li>
+                <a
+                  onClick={() => setMenuOpen(false)}
+                  href="#contact-section"
+                  className="transition hover:text-red-500 hover:border-b border-red-500"
+                >
+                  Contact
+                </a>
+              </li>
+            </ul>
+          </div>
+        )}
+
+        <section id="about-section" className="about-section w-full max-w-[1200px] flex flex-col lg:flex-row justify-between items-center py-48">
+          <div className="hero-content space-y-8 max-w-2xl">
             <div className="animate-dimlight text-6xl font-bold">Grittamet Wilai</div>
 
             <p className="text-xl text-gray-300 leading-relaxed w-150">
@@ -139,7 +208,7 @@ export default function Home() {
                 Download Resume
               </span>
             </a>
-          </section>
+          </div>
 
           <div className="hero-image transition hover:scale-105">
             <img
@@ -148,48 +217,50 @@ export default function Home() {
               className="image h-full"
             />
           </div>
-        </div>
+        </section>
 
-        <div id="skills-section" className="w-300 py-32">
-          <div className="text-3xl font-bold mb-8">Skills</div>
+        <section id="skills-section" className="skills-section w-full max-w-[1200px] py-32">
+          <div className="skills-content">
+            <div className="text-3xl font-bold mb-8">Skills</div>
 
-          <div className="flex flex-wrap gap-4 mb-8">
-            {filters.map(filter => (
-              <button
-                key={filter}
-                onClick={() => {
-                  setActiveFilter(filter)
-                  setAnimationKey(prev => prev + 1)
-                }}
-                className={`rounded py-2 px-6 transition cursor-pointer ${activeFilter === filter
-                  ? 'bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 text-white'
-                  : 'bg-[#373735] text-[#999] hover:bg-[#575755] hover:text-white'
-                  }`}
-              >
-                {filter}
-              </button>
-            ))}
+            <div className="flex flex-wrap gap-4 mb-8">
+              {filters.map(filter => (
+                <button
+                  key={filter}
+                  onClick={() => {
+                    setActiveFilter(filter)
+                    setAnimationKey(prev => prev + 1)
+                  }}
+                  className={`rounded py-2 px-6 transition cursor-pointer ${activeFilter === filter
+                    ? 'bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 text-white'
+                    : 'bg-[#373735] text-[#999] hover:bg-[#575755] hover:text-white'
+                    }`}
+                >
+                  {filter}
+                </button>
+              ))}
+            </div>
+
+            <ul key={animationKey} className="flex flex-wrap gap-4">
+              {filteredSkills.map((skill, index) => (
+                <li
+                  key={skill.name}
+                  className="animate-slideinright flex items-center w-36 bg-[#373735] rounded py-3 px-5 gap-3 hover:bg-[#474745] transition transform hover:scale-105"
+                  style={{
+                    color: skill.color,
+                    animationDelay: `${index * 0.1}s`,
+                  }}
+                >
+                  <img
+                    src={skill.icon}
+                    alt={skill.name}
+                    className={`w-6 h-6 ${skill.name === 'Express.js' ? 'bg-white rounded-full' : ''} ${skill.name === 'MySQL' ? 'bg-white' : ''}`}
+                  />
+                  <span className="font-medium">{skill.name}</span>
+                </li>
+              ))}
+            </ul>
           </div>
-
-          <ul key={animationKey} className="flex flex-wrap gap-4">
-            {filteredSkills.map((skill, index) => (
-              <li
-                key={skill.name}
-                className="animate-slideinright flex items-center w-36 bg-[#373735] rounded py-3 px-5 gap-3 hover:bg-[#474745] transition transform hover:scale-105"
-                style={{
-                  color: skill.color,
-                  animationDelay: `${index * 0.1}s`,
-                }}
-              >
-                <img
-                  src={skill.icon}
-                  alt={skill.name}
-                  className={`w-6 h-6 ${skill.name === 'Express.js' ? 'bg-white rounded-full' : ''} ${skill.name === 'MySQL' ? 'bg-white' : ''}`}
-                />
-                <span className="font-medium">{skill.name}</span>
-              </li>
-            ))}
-          </ul>
 
           <div className="marquee-container overflow-hidden bg-[#373735] shadow-sm p-4 mt-40">
             <div className="marquee-track animate-marquee flex w-max">
@@ -205,16 +276,16 @@ export default function Home() {
               ))}
             </div>
           </div>
-        </div>
+        </section>
 
-        <div id="projects-section" className="w-300 py-32">
+        <section id="projects-section" className="projects-section w-full max-w-[1200px] py-32">
           <div className="text-3xl font-bold mb-8">Projects</div>
 
-          <div className="flex gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projectsData.map((project) => (
               <div
                 key={project.name}
-                className="project-card bg-[#373735] rounded-lg w-1/3 hover:bg-[#474745] transition transform hover:-translate-y-1"
+                className="project-card bg-[#373735] rounded-lg hover:bg-[#474745] transition transform hover:-translate-y-1"
               >
                 <img src={project.image} alt={project.name} className="w-full h-56 rounded-t-lg" />
 
@@ -224,20 +295,18 @@ export default function Home() {
 
                     <p className="text-gray-300">{project.description}</p>
 
-                    <div className="">
-                      {project.skills && project.skills.length > 0 && (
-                        <ul className="flex flex-wrap gap-2">
-                          {project.skills.map((skill) => (
-                            <li
-                              key={skill}
-                              className="bg-[#575755] text-white rounded-full px-4 py-2 text-sm"
-                            >
-                              {skill}
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-                    </div>
+                    {project.skills && project.skills.length > 0 && (
+                      <ul className="flex flex-wrap gap-2">
+                        {project.skills.map((skill) => (
+                          <li
+                            key={skill}
+                            className="bg-[#575755] text-white rounded-full px-4 py-2 text-sm"
+                          >
+                            {skill}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
 
                   <div className="flex gap-4">
@@ -262,9 +331,9 @@ export default function Home() {
               </div>
             ))}
           </div>
-        </div>
+        </section>
 
-        <div id="experiences-section" className="w-300 py-32">
+        <section id="experiences-section" className="experiences-section w-full max-w-[1200px] py-32">
           <div className="text-3xl font-bold mb-8">Experiences</div>
 
           <div className="project-card flex bg-[#373735] rounded-lg w-full p-8 gap-8 relative overflow-hidden">
@@ -289,7 +358,7 @@ export default function Home() {
             <div className="border border-gray-600"></div>
 
             <div className="flex flex-col gap-4 w-1/2">
-              <div className="flex items-end gap-4">
+              <div className="flex flex-col md:flex-row gap-4">
                 <div className="text-xl font-semibold">Internship</div>
                 <div className="text-gray-300">( June - July 2024 )</div>
               </div>
@@ -312,16 +381,16 @@ export default function Home() {
               </ul>
             </div>
           </div>
-        </div>
+        </section>
 
-        <div id="contact-section" className="w-300 py-32 pb-76">
+        <section id="contact-section" className="contact-section w-full max-w-[1200px] py-32 pb-76">
           <div className="text-3xl font-bold mb-8">Contact</div>
 
-          <div className="flex gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {contactData.map((contact) => (
               <div
                 key={contact.method}
-                className="contact-card flex flex-col justify-between p-8 gap-8 bg-[#373735] rounded-lg w-1/4 hover:bg-[#474745] transition transform hover:-translate-y-1"
+                className="contact-card flex flex-col justify-between p-8 gap-8 bg-[#373735] rounded-lg hover:bg-[#474745] transition transform hover:-translate-y-1"
               >
                 <div className="flex flex-col gap-4">
                   <div className="flex items-center gap-2 text-xl font-semibold">
@@ -340,7 +409,7 @@ export default function Home() {
               </div>
             ))}
           </div>
-        </div>
+        </section>
 
         <footer className="footer">
           <div className="container">
